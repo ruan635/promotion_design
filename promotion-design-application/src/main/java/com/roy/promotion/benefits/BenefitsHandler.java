@@ -1,5 +1,11 @@
 package com.roy.promotion.benefits;
 
+import java.util.List;
+
+import com.roy.promotion.engine.ActionRule;
+import com.roy.promotion.engine.RuleContext;
+import com.roy.promotion.enums.BenefitType;
+
 /**
  * @ClassName BenefitsHandler
  * @Author roy
@@ -7,4 +13,9 @@ package com.roy.promotion.benefits;
  * @Version v1.0
  **/
 public interface BenefitsHandler {
+
+    boolean handleBenefits(RuleContext ruleContext, ActionRule action);
+
+    BenefitType getBenefitType();
+
 }

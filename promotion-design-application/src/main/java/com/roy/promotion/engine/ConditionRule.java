@@ -1,5 +1,7 @@
 package com.roy.promotion.engine;
 
+import org.jeasy.rules.annotation.Rule;
+
 import com.roy.promotion.enums.OperateEnum;
 
 /**
@@ -8,6 +10,7 @@ import com.roy.promotion.enums.OperateEnum;
  * @Date 2023/10/7 3:08 PM
  * @Version v1.0
  **/
+@Rule
 public class ConditionRule {
 
     private OperateEnum operate;

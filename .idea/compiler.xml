@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="promotion_design-proxy" />
+        <module name="promotion_design-domain" />
+        <module name="promotion_design-docs" />
+        <module name="promotion-design-application" />
+        <module name="promotion_design-rpc" />
+        <module name="promotion_design-starter" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>
