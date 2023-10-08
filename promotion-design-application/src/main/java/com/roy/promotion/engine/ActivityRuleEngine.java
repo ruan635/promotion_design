@@ -2,6 +2,7 @@ package com.roy.promotion.engine;
 
 import java.util.List;
 
+import org.jeasy.rules.api.Fact;
 import org.jeasy.rules.api.Facts;
 import org.jeasy.rules.api.RuleListener;
 import org.jeasy.rules.api.Rules;
@@ -23,14 +24,20 @@ public class ActivityRuleEngine {
         List<ConditionRule> conditions = ruleContext.getConditions();
         if (conditions == null || conditions.size() == 0) {
 
-            conditions.stream().forEach(ruleGroup::addRule);
+            conditions.stream().forEach(c -> {
+                // 添加条件规则
+                ruleGroup.addRule(c);
+                // 添加要验证的实际值
+                Fact<String> fact = new Fact<>("value", c.getFactValue());
+                facts.add(fact);
+            });
         }
-
 
         Rules rules = new Rules();
         rules.register(ruleGroup);
 
         AbstractRulesEngine rulesEngine = new DefaultRulesEngine();
+        // 注册监听器用于回调
         rulesEngine.registerRuleListener(listener);
         rulesEngine.fire(rules, facts);
     }

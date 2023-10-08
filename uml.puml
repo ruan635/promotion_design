@@ -1,0 +1,112 @@
+@startuml
+class com.roy.promotion.benefits.MoneyBenefitsHandler {
++ boolean handleBenefits(RuleContext,ActionRule)
++ BenefitType getBenefitType()
+}
+class com.roy.promotion.engine.ActivityRuleListener {
+- BenefitsBus benefitsBus
++ void onSuccess(Rule,Facts)
+}
+class com.roy.promotion.engine.ActionRule {
+- BenefitType benefitType
+- String value
++ BenefitType getBenefitType()
++ void setBenefitType(BenefitType)
++ String getValue()
++ void setValue(String)
+}
+class com.roy.promotion.benefits.CertificationBenefitsHandler {
++ boolean handleBenefits(RuleContext,ActionRule)
++ BenefitType getBenefitType()
+}
+class com.roy.promotion.engine.RuleContext {
+- long inviterId
+- long inviteeId
+- List<ConditionRule> conditions
+- List<ActionRule> actions
++ long getInviterId()
++ void setInviterId(long)
++ long getInviteeId()
++ void setInviteeId(long)
++ List<ConditionRule> getConditions()
++ void setConditions(List<ConditionRule>)
++ List<ActionRule> getActions()
++ void setActions(List<ActionRule>)
+}
+enum com.roy.promotion.enums.OperateEnum {
++  GREATER_THAN
++  GREATER_EQUAL_THAN
++  LESS_THAN
++  LESS_EQUAL_THAN
++  EQUALS
++  CONTAINS
+- String op
+- String desc
+}
+class com.roy.promotion.engine.ConditionRule {
+- OperateEnum operate
+- String value
+- String factValue
++ OperateEnum getOperate()
++ void setOperate(OperateEnum)
++ String getValue()
++ void setValue(String)
++ String getFactValue()
++ void setFactValue(String)
++ boolean evaluate(Facts)
++ void execute(Facts)
++ int compareTo(Rule)
+}
+class com.roy.promotion.engine.BenefitsBus {
+- List<BenefitsHandler> handlers
++ boolean dispatch(RuleContext,ActionRule)
+}
+interface com.roy.promotion.benefits.BenefitsHandler {
+~ boolean handleBenefits(RuleContext,ActionRule)
+~ BenefitType getBenefitType()
+}
+class com.roy.promotion.dto.ActivityTemplateDTO {
+- long id
+- String templateName
+- boolean hasRules
+- boolean multiRules
+- long ruleId
+}
+enum com.roy.promotion.enums.BenefitType {
++  MONEY
++  CERTIFICATION
+- int type
+}
+class com.roy.promotion.engine.ActivityRuleEngine {
++ void fire(RuleContext,RuleListener)
+}
+class com.roy.promotion.dto.ActivityRuleDTO {
+- long id
+- String ruleName
+- List<ActivityMetaDTO> metaList
+}
+class com.roy.promotion.dto.ActivityMetaDTO {
+- long id
+- String metaName
+- MetaTypeEnum metaType
+- int unit
+- OperateEnum operate
+}
+enum com.roy.promotion.enums.MetaTypeEnum {
++  CONDITION
++  ACTION
+}
+class com.roy.promotion.dto.ActivityInfoDTO {
+- long id
+- String name
+- long startTime
+- long endTime
+- long activityTemplateId
+}
+
+
+com.roy.promotion.benefits.BenefitsHandler <|.. com.roy.promotion.benefits.MoneyBenefitsHandler
+org.jeasy.rules.api.RuleListener <|.. com.roy.promotion.engine.ActivityRuleListener
+com.roy.promotion.benefits.BenefitsHandler <|.. com.roy.promotion.benefits.CertificationBenefitsHandler
+org.jeasy.rules.api.Rule <|.. com.roy.promotion.engine.ConditionRule
+@enduml

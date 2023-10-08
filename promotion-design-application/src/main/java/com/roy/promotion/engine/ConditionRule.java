@@ -1,6 +1,10 @@
 package com.roy.promotion.engine;
 
-import org.jeasy.rules.annotation.Rule;
+import java.lang.annotation.Annotation;
+
+
+import org.jeasy.rules.api.Facts;
+import org.jeasy.rules.api.Rule;
 
 import com.roy.promotion.enums.OperateEnum;
 
@@ -10,8 +14,7 @@ import com.roy.promotion.enums.OperateEnum;
  * @Date 2023/10/7 3:08 PM
  * @Version v1.0
  **/
-@Rule
-public class ConditionRule {
+public class ConditionRule implements Rule {
 
     private OperateEnum operate;
 
@@ -19,4 +22,42 @@ public class ConditionRule {
 
     private String factValue;
 
+    public OperateEnum getOperate() {
+        return operate;
+    }
+
+    public void setOperate(OperateEnum operate) {
+        this.operate = operate;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public String getFactValue() {
+        return factValue;
+    }
+
+    public void setFactValue(String factValue) {
+        this.factValue = factValue;
+    }
+
+    @Override
+    public boolean evaluate(Facts facts) {
+        return false;
+    }
+
+    @Override
+    public void execute(Facts facts) throws Exception {
+
+    }
+
+    @Override
+    public int compareTo(Rule o) {
+        return 0;
+    }
 }
